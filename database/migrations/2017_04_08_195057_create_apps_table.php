@@ -22,12 +22,13 @@ class CreateAppsTable extends Migration
             $table->string('price');
             $table->string('category');
             $table->date('last_updated');
-            $table->string('version');
-            $table->string('languages');
-            $table->string('copyright');
+            $table->string('version')->nullable();
+            $table->string('languages')->nullable();
+            $table->string('copyright')->nullable();
             $table->double('rating');
             $table->integer('rating_count');
             $table->enum('os', ['android', 'ios']);
+            $table->string('store_url');
             $table->timestamps();
         });
     }

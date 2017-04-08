@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRankingsTable extends Migration
+class CreateRankingEntriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateRankingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ratings', function (Blueprint $table) {
+        Schema::create('ranking_entries', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('app_id');
-            $table->rating()
+            $table->integer('app_id')->unsigned();
+            $table->integer('position');
+            $table->enum('type', ['free', 'paid']);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateRankingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ratings');
+        Schema::dropIfExists('ranking_entries');
     }
 }
