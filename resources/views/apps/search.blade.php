@@ -19,16 +19,13 @@
                 <h3 class="mb-4 text-center">{{ $searchResults->count() }} results for "{{ $query }}"</h3>
 
                 @if (count($searchResults) == 0)
-                    <p class="lead text-center">Can't find what you're looking for? Just paste a Google Play or App Store URL in the search field and we'll automatically add your app to our database.</p>
+                    <p class="lead text-center">Can't find what you're looking for? Just paste a Google Play or App Store URL in the search bar and we'll automatically start tracking your app.</p>
                 @endif
 
                 <div class="ranking-list">
                     @foreach ($searchResults as $searchResult)
                         <a href="{{ action('AppController@show', $searchResult->id) }}" class="ranking-entry @if($loop->last) borderless-bottom @endif">
                             <div class="row">
-                                {{-- <div class="col-sm-1">
-                                    <h3>{{ $searchResult->position }}</h3>
-                                </div> --}}
                                 <div class="col-sm-2">
                                     <img src="{{ $searchResult->icon_url }}" class="full-width app-icon">
                                 </div>

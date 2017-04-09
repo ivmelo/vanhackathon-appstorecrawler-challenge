@@ -166,6 +166,11 @@ div.stats-box.inverse hr {
     color: #fff;
 }
 
+.btn.btn-orange {
+    background-color: #f89622;
+    color: #fff;
+}
+
 /* tags */
 span.tag {
     border: 1px solid #f89622;

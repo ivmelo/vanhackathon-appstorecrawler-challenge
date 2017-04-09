@@ -12,7 +12,8 @@
 */
 
 Route::resource('apps', 'AppController');
+Route::get('ranking', 'AppController@ranking');
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->action('AppController@index');
 });

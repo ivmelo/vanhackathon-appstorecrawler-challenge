@@ -1,15 +1,10 @@
 @extends('app')
 
 @section('content')
-<div class="jumbo">
+<div class="searchbar-inverse">
     <div class="container">
-        <div class="call-to-action">
-            <h1 class="text-center">Get insights into your apps!</h1>
-            <p class="lead text-center">Mobile add planning, execution and analysis are complicated for startups <br>
-                because they cannot reach all available app marketing tools.</p>
-            <p class="lead text-center">App Samurai makes it easy for them without requiring in depth mobile ads knowledge.</p>
-
-            <div class="col-md-10 offset-md-1">
+        <div class="row">
+            <div class="col-md-12">
                 @include('partials.searchwidget')
             </div>
         </div>
@@ -17,7 +12,7 @@
 </div>
 <div class="charts">
     <div class="container">
-        <h1 class="text-center margin-bottom-5">Top 10 Free Apps</h1>
+        <h1 class="text-center margin-bottom-5">Top 100 Free Apps</h1>
 
         <div class="row">
             <div class="col-md-6">
@@ -40,13 +35,7 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-4 offset-md-4">
-                <a href="{{ action('AppController@ranking') }}" class="btn btn-block btn-orange mt-5 mb-5">See All</a>
-            </div>
-        </div>
-
-        <h1 class="text-center margin-top-5 margin-bottom-5">Top 10 Paid Apps</h1>
+        <h1 class="text-center margin-top-5 margin-bottom-5">Top 100 Paid Apps</h1>
 
         <div class="row">
             <div class="col-md-6">
@@ -66,12 +55,6 @@
                         @include('partials.rankingentry')
                     @endforeach
                 </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4 offset-md-4">
-                <a href="{{ action('AppController@ranking') }}" class="btn btn-block btn-orange mt-5 mb-5">See All</a>
             </div>
         </div>
     </div>
