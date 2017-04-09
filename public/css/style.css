@@ -46,6 +46,20 @@ hr {
     margin: .5em 0;
 }
 
+.ellipsis-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.ellipsis-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
 /* components */
 .searchbar {
     background-color: #1d374f;
@@ -143,6 +157,8 @@ span.tag {
     font-size: 12px;
     text-align: center;
 }
+
+
 
 /* specific styles */
 

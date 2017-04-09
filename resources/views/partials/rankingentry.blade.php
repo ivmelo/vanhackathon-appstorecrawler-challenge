@@ -7,8 +7,8 @@
             <img src="{{ $rankingEntry->app->icon_url }}" class="full-width app-icon">
         </div>
         <div class="col-sm-6">
-            <h4>{{ $rankingEntry->app->name }}</h4>
-            <p>{{ $rankingEntry->app->developer }}</p>
+            <h4 class="ellipsis-2">{{ $rankingEntry->app->name }}</h4>
+            <p class="ellipsis-1">{{ $rankingEntry->app->developer }}</p>
         </div>
         <div class="col-sm-2">
             <span class="tag mini">{{ $rankingEntry->app->price }}</span>
