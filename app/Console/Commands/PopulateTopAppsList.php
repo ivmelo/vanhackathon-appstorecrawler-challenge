@@ -18,7 +18,7 @@ class PopulateTopAppsList extends Command
      *
      * @var string
      */
-    protected $signature = 'populate:topapps {--paid} {--android} {--ios}';
+    protected $signature = 'charts:update {--paid} {--android} {--ios}';
 
     /**
      * The console command description.

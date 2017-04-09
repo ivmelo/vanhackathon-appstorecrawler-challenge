@@ -11,6 +11,8 @@
 |
 */
 
+Route::resource('apps', 'AppController');
+
 Route::get('/', function () {
     return view('welcome');
 });

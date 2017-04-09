@@ -1,0 +1,83 @@
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+/* general styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: bold;
+    color: #1d374f;
+}
+
+p,
+p small {
+    font-weight: 300;
+    color: #909090;
+}
+
+hr {
+    border-color: #c6ccd2;
+}
+
+/* helpers */
+.full-width {
+    width: 100%;
+}
+
+/* components */
+.searchbar {
+    background-color: #1d374f;
+}
+
+.searchbar .form-control {
+    border: 0;
+    border-bottom: 1px solid #fff;
+    border-radius: 0;
+    color: #fff;
+    padding-left: 0px;
+    background-color: inherit;
+}
+
+.searchbar .form-control::placeholder {
+    color: #ecf0f1;
+}
+
+.rating-box {
+    background-color: #55a2e8;
+    border-radius: 10px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.rating-box h1,
+.rating-box p small {
+    color: #fff;
+}
+
+.rating-box p {
+    margin-bottom: 0;
+}
+
+/* specific styles */
+
+.app-icon {
+    border-radius: 15px;
+}
+
+/* screens */
+.app-screenshot {
+    height: 400px;
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.screenshots {
+    height: 400px;
+    width: 100%;
+    white-space: nowrap;
+    overflow-y: scroll;
+}
