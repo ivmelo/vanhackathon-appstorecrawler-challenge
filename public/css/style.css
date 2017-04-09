@@ -1,4 +1,5 @@
-body {
+body,
+input {
     font-family: 'Lato', sans-serif;
 }
 
@@ -78,6 +79,10 @@ hr {
     background-color: #1d374f;
 }
 
+.searchbar-inverse {
+    background-color: #f89622;
+}
+
 input.search-input.form-control {
     border: 0;
     border-bottom: 1px solid #fff;
@@ -111,7 +116,7 @@ input.search-input.form-control::placeholder {
 
 /* stats box */
 .stats-box {
-    max-width: 200px;
+    /*max-width: 200px;*/
     border: 1px solid #f89622;
     border-radius: 5px;
     padding: 1rem;
@@ -128,6 +133,18 @@ input.search-input.form-control::placeholder {
 
 .stats-box hr {
     border-color: #f89622;
+}
+
+div.stats-box.inverse {
+    background-color: #f89622;
+}
+
+div.stats-box.inverse h1,
+div.stats-box.inverse p {
+    color: #fff;
+}
+div.stats-box.inverse hr {
+    border-color: #fff;
 }
 
 /* buttons */
@@ -241,4 +258,9 @@ span.tag {
 
 .borderless-bottom {
     border-bottom: none;
+}
+
+/* footer */
+footer p {
+    margin: 1.5rem;
 }

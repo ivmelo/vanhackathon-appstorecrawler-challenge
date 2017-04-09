@@ -1,6 +1,15 @@
 @extends('app')
 
 @section('content')
+<div class="searchbar-inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                @include('partials.searchwidget')
+            </div>
+        </div>
+    </div>
+</div>
 <div class="charts">
     <div class="container">
         <h1 class="text-center margin-bottom-5">Search Results</h1>
@@ -8,6 +17,10 @@
         <div class="row">
             <div class="col-md-10 offset-md-1">
                 <h3 class="mb-4 text-center">{{ $searchResults->count() }} results for "{{ $query }}"</h3>
+
+                @if (count($searchResults) == 0)
+                    <p class="lead text-center">Can't find what you're looking for? Just paste a Google Play or App Store URL in the search field and we'll automatically add your app to our database.</p>
+                @endif
 
                 <div class="ranking-list">
                     @foreach ($searchResults as $searchResult)

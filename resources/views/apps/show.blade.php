@@ -7,27 +7,17 @@
             <div class="col-md-12">
                 @include('partials.searchwidget')
             </div>
-            {{-- <div class="col-md-3">
-                <div class="form-group mb-2 mt-2">
-                    <input type="text" name="store" value="Choose your store..." class="form-control">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group mb-2 mt-2">
-                    <input type="text" name="country" value="Choose your country" class="form-control">
-                </div>
-            </div> --}}
         </div>
     </div>
 </div>
 <div class="app-details mt-5">
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <img src="{{ $app->icon_url }}" alt="App Icon" class="full-width app-icon">
-                <a href="{{ $app->store_url }}" target="_blank" class="btn buy-button mt-2">{{ $app->price }}</a>
+                {{-- <a href="{{ $app->store_url }}" target="_blank" class="btn buy-button mt-2">{{ $app->price }}</a> --}}
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <h2>{{ $app->name }}
                     @if ($app->os == 'ios')
                         <img src="{{ asset('img/app-store.png') }}" alt="App Store Logo" class="store-logo">
@@ -37,9 +27,13 @@
                 </h2>
 
                 <p class="fw-400">{{ $app->developer }}</p>
-                <span class="tag">{{ $app->category }}</span>
-                <span class="tag">{{ $app->price == 'Free' ? 'Free' : 'Paid' }}</span>
+                {{-- <span class="tag">{{ $app->category }}</span>
+                <span class="tag">{{ $app->price == 'Free' ? 'Free' : 'Paid' }}</span> --}}
                 <p>{{ str_limit($app->description, 230) }}</p>
+                <p>Price: {{ $app->price }}
+                    <span class="tag">{{ $app->category }}</span>
+                    <span class="tag">{{ $app->price == 'Free' ? 'Free' : 'Paid' }}</span>
+                </p>
             </div>
             <div class="col-md-3">
                 <h3>Rating</h3>
@@ -59,18 +53,40 @@
             <div class="col-md-6">
                 <h3 class="with-hr">Ranking</h3>
                 @if ($app->rankingEntries->count() > 0)
-                    <div class="stats-box">
-                        <p>Today</p>
-                        <hr>
-                        <h1 class="text-center">#{{ $app->rankingEntries->first()->position }}</h1>
-                        <p class="text-center">
-                            {{ ucfirst($app->rankingEntries->first()->type) }} apps,
-                            @if ($app->os == 'ios')
-                                App Store
-                            @else
-                                Google Play
-                            @endif
-                        </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="stats-box">
+                                <p>General</p>
+                                <hr>
+                                <h1 class="text-center">#{{ $app->rankingEntries->first()->position }}</h1>
+                                <p class="text-center">
+                                    {{ ucfirst($app->rankingEntries->first()->type) }} Apps
+                                    <br>
+                                    @if ($app->os == 'ios')
+                                        App Store
+                                    @else
+                                        Google Play
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="stats-box inverse">
+                                <p>By Category</p>
+                                <hr>
+                                <h1 class="text-center">#{{ $categoryPosition }}</h1>
+                                <p class="text-center">
+                                    {{ $app->category }},
+                                    {{ ucfirst($app->rankingEntries->first()->type) }}
+                                    <br>
+                                    @if ($app->os == 'ios')
+                                        App Store
+                                    @else
+                                        Google Play
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 @else
                     <p>This app hasn't been featured in the top 100 rank.</p>
@@ -78,7 +94,7 @@
             </div>
             <div class="col-md-6">
                 <h3 class="with-hr">Statistics</h3>
-                <p>There's not enough data to generate a chart yet.</p>
+                <p>There's not enough data to generate a chart for this app.</p>
             </div>
         </div>
     </div>

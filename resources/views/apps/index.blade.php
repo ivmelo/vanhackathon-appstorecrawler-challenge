@@ -4,10 +4,10 @@
 <div class="jumbo">
     <div class="container">
         <div class="call-to-action">
-            <h1 class="text-center">Get insights on your apps!</h1>
+            <h1 class="text-center">Get insights into your apps!</h1>
             <p class="lead text-center">Mobile add planning, execution and analysis are complicated for startups <br>
                 because they cannot reach all available app marketing tools.</p>
-            <p class="lead text-center">App samurai makes it easy for them without requiring in depth mobile ads knowledge.</p>
+            <p class="lead text-center">App Samurai makes it easy for them without requiring in depth mobile ads knowledge.</p>
 
             <div class="col-md-10 offset-md-1">
                 @include('partials.searchwidget')
@@ -21,7 +21,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <h3 class="mb-3">App Store</h3>
+                <h3 class="mb-3"><img src="{{ asset('img/app-store.png') }}" class="store-logo" alt="App store logo."> App Store</h3>
 
                 <div class="ranking-list">
                     @foreach ($appStoreFreeRankingEntry as $rankingEntry)
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <h3 class="mb-3">Google Play</h3>
+                <h3 class="mb-3"><img src="{{ asset('img/play-store.png') }}" class="store-logo" alt="App store logo."> Google Play</h3>
 
                 <div class="ranking-list">
                     @foreach ($googlePlayFreeRankingEntry as $rankingEntry)
@@ -44,7 +44,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <h3 class="mb-3">App Store</h3>
+                <h3 class="mb-3"><img src="{{ asset('img/app-store.png') }}" class="store-logo" alt="App store logo."> App Store</h3>
 
                 <div class="ranking-list">
                     @foreach ($appStorePaidRankingEntry as $rankingEntry)
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <h3 class="mb-3">Google Play</h3>
+                <h3 class="mb-3"><img src="{{ asset('img/play-store.png') }}" class="store-logo" alt="App store logo."> Google Play</h3>
 
                 <div class="ranking-list">
                     @foreach ($googlePlayPaidRankingEntry as $rankingEntry)
@@ -63,8 +63,5 @@
             </div>
         </div>
     </div>
-</div>
-<div class="company-info">
-
 </div>
 @endsection

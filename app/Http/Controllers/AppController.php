@@ -25,7 +25,13 @@ class AppController extends Controller
             }
 
             // Find apps by name.
-            $apps = App::where('name', 'like', '%'. $request->get('q') . '%')->get();
+            $searchValues = preg_split('/\s+/', $request->get('q'), -1, PREG_SPLIT_NO_EMPTY);
+
+            $apps = App::where(function ($q) use ($searchValues) {
+                foreach ($searchValues as $value) {
+                    $q->orWhere('name', 'like', "%{$value}%");
+                }
+            })->get();
 
             return view('apps.search', [
                 'searchResults' => $apps,
@@ -71,18 +77,31 @@ class AppController extends Controller
     public function show($id)
     {
         $app = App::findOrFail($id);
-        return view('apps.show', compact('app'));
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        // Try to guess the app category's position by counting how many apps
+        // of the same category are in the main ranking, and finding it's position.
+        $rankingEntries = RankingEntry::with('app')->whereHas('App', function($q) use ($app){
+            $q->where('os', '=', $app->os);
+            $q->where('category', '=', $app->category);
+            if ($app->price != 'Free') {
+                $q->where('price', '<>', 'Free');
+            } else {
+                $q->where('price', '=', 'Free');
+            }
+        })->orderBy('position', 'asc')->get();
+
+        $categoryPosition = 0;
+
+        foreach ($rankingEntries as $rankingEntry) {
+            $categoryPosition++;
+
+            if($rankingEntry->app->id == $app->id)
+                break;
+        }
+
+        return view('apps.show', [
+            'app' => $app,
+            'categoryPosition' => $categoryPosition
+        ]);
     }
 }
