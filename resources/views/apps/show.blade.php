@@ -38,7 +38,7 @@
                     @endif
                 </h2>
 
-                <h5>{{ $app->developer }}</h5>
+                <p class="fw-400">{{ $app->developer }}</p>
                 <span class="tag">{{ $app->category }}</span>
                 <span class="tag">{{ $app->price == 'Free' ? 'Free' : 'Paid' }}</span>
                 <p>{{ str_limit($app->description, 230) }}</p>
@@ -58,19 +58,26 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h3>Ranking</h3>
-                <hr>
+                <h3 class="with-hr">Ranking</h3>
+                {{-- <hr> --}}
                 <div class="stats-box">
-                    <p>By Country</p>
+                    <p>Today</p>
                     <hr>
                     <h1 class="text-center">#{{ $app->rankingEntries->first()->position }}</h1>
-                    <p class="text-center">General Ranking</p>
+                    <p class="text-center">
+                        {{ ucfirst($app->rankingEntries->first()->type) }} apps,
+                        @if ($app->os == 'ios')
+                            App Store
+                        @else
+                            Google Play
+                        @endif
+                    </p>
                 </div>
             </div>
             <div class="col-md-6">
-                <h3>Statistics</h3>
-                <hr>
-                <p>Graph goes here...</p>
+                <h3 class="with-hr">Statistics</h3>
+                {{-- <hr> --}}
+                <p>Not enough data to generate graph...</p>
             </div>
         </div>
     </div>
@@ -79,8 +86,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3>Screenshots</h3>
-                <hr>
+                <h3 class="with-hr">Screenshots</h3>
+                {{-- <hr> --}}
                 <div class="screenshots">
                     @foreach ($app->screenshots as $screenshot)
                         <img src="{{ $screenshot->img_url }}" alt="App screenshot." class="app-screenshot">

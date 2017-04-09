@@ -34,6 +34,18 @@ hr {
     margin-bottom: .1em;
 }
 
+.with-hr {
+    border-bottom: 1px solid #c6ccd2;
+    padding-bottom: .6em;
+    margin-bottom: 1em;
+    display: inline-block;
+}
+
+.fw-400 {
+    font-weight: 400;
+    margin: .5em 0;
+}
+
 /* components */
 .searchbar {
     background-color: #1d374f;
@@ -80,6 +92,10 @@ hr {
 .stats-box p {
     color: #f89622;
     margin: 0;
+}
+
+.stats-box h1 {
+    margin: .5em 0;
 }
 
 .stats-box hr {
