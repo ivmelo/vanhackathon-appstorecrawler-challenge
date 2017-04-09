@@ -14,6 +14,8 @@ Bonus: Get also app details: icon, screenshots, description.
 
 You can try our app [here](https://storecrawler.ivmelo.me).
 
+[UI/UX Design sheets](https://xd.adobe.com/view/d4395673-f191-4241-a43b-fa1dbb656717/).
+
 Our solution is composed of two projects. The first one is a [web crawler](https://github.com/ivmelo/store-scrapper) library (PHP) that scraps data from the App Store and Google Play. The second one, is a web application (PHP, Laravel) that displays that data in a easy to understand way. You can see not only how the app ranks in the general and category charts, but you can also check a list of the top apps, browse apps, search and etc...
 
 The heart of our application is a command `php artisan chart:update` which should be executed daily in order to update the charts. We went for this approach in order to reduce the response time for users, since the charts are updated once a day, we can place this command in the server's crontab and have it done automatically for us.
