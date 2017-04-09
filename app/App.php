@@ -11,7 +11,8 @@ class App extends Model
         'name', 'developer', 'icon_url',
         'description', 'price', 'category',
         'last_updated', 'version', 'languages',
-        'copyright', 'rating', 'rating_count', 'os', 'store_url'
+        'copyright', 'rating', 'rating_count',
+        'os', 'store_id', 'store_url'
     ];
 
     public function screenshots()
@@ -31,53 +32,61 @@ class App extends Model
 
         $parsedURL = parse_url($url);
 
-        // Guess the store.
+        // Guess the store, grabs the unique App ID and creates a standardised URL.
         if (strpos($url, 'itunes.apple.com')) {
             $store = 'itunes';
-
             $urlParts = explode('/', $parsedURL['path']);
-
+            // Grabs the app unique ID.
             $storeId = substr($urlParts[4], 2);
             // Creates an APP URL for the US store.
             $betterURL = 'https://' . $parsedURL['host'] . '/us/app/' . $urlParts[3] . '/' . $urlParts[4] . '?mt=8';
         } else if (strpos($url, 'play.google.com')) {
             $store = 'gplay';
+            $queryParts = [];
+            parse_str($parsedURL['query'], $queryParts);
+            // Grabs the app unique ID.
+            $storeId = $queryParts['id'];
+            // Creates an APP URL for the US store and using EN as the language.
+            $betterURL = 'https://play.google.com/store/apps/details?id=' . $storeId . '&hl=en';
         }
-
-        dd(parse_url($url));
 
         $scraper = new Scraper();
 
         if ($store) {
-            // Defines which store to query.
-            if ($store == 'itunes') {
-                $appDetails = $scraper->getAppStoreAppData($url);
-            } else if ($store == 'gplay') {
-                $appDetails = $scraper->getPlayStoreAppData($url);
-            }
+            // First, try to find the app by it's store id.
+            $app = App::where('store_id', '=', $storeId)->first();
 
-            // Find the entry or create if doesn't exist.
-            $app = App::firstOrCreate([
-                'name' => $appDetails['name'],
-                'developer' => $appDetails['developer'],
-                'os' => $store == 'itunes' ? 'ios' : 'android',
-            ],
-            [
-                'icon_url' => $appDetails['icon_url'],
-                'description' => $appDetails['description'],
-                'price' => $appDetails['price'],
-                'category' => $appDetails['category'],
-                'last_updated' => $appDetails['last_update'],
-                'rating' => round($appDetails['rating'], 4),
-                'rating_count' => $appDetails['rating_count'],
-                'store_url' => $url,
-            ]);
+            if (! $app) {
+                // Defines which store to query.
+                if ($store == 'itunes') {
+                    $appDetails = $scraper->getAppStoreAppData($betterURL);
+                } else if ($store == 'gplay') {
+                    $appDetails = $scraper->getPlayStoreAppData($betterURL);
+                }
 
-
-            foreach ($appDetails['screens'] as $screenshot) {
-                $app->screenshots()->firstOrCreate([
-                    'img_url' => $screenshot
+                // If not found by store ID, find by the combination of name + developer + store.
+                $app = App::firstOrCreate([
+                    'name' => $appDetails['name'],
+                    'developer' => $appDetails['developer'],
+                    'os' => $store == 'itunes' ? 'ios' : 'android',
+                ],
+                [
+                    'icon_url' => $appDetails['icon_url'],
+                    'description' => $appDetails['description'],
+                    'price' => $appDetails['price'],
+                    'category' => $appDetails['category'],
+                    'last_updated' => $appDetails['last_update'],
+                    'rating' => round($appDetails['rating'], 4),
+                    'rating_count' => $appDetails['rating_count'],
+                    'store_url' => $betterURL,
+                    'store_id' => $storeId
                 ]);
+
+                foreach ($appDetails['screens'] as $screenshot) {
+                    $app->screenshots()->firstOrCreate([
+                        'img_url' => $screenshot
+                    ]);
+                }
             }
 
             return $app;

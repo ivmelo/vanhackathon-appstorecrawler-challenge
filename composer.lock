@@ -381,12 +381,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ivmelo/store-scrapper.git",
-                "reference": "eedfaf48f7cd5aaf841bed0fbb5fde1f427027cb"
+                "reference": "b2543ea51a122da4c46d958b2619a8357af2be52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ivmelo/store-scrapper/zipball/eedfaf48f7cd5aaf841bed0fbb5fde1f427027cb",
-                "reference": "eedfaf48f7cd5aaf841bed0fbb5fde1f427027cb",
+                "url": "https://api.github.com/repos/ivmelo/store-scrapper/zipball/b2543ea51a122da4c46d958b2619a8357af2be52",
+                "reference": "b2543ea51a122da4c46d958b2619a8357af2be52",
                 "shasum": ""
             },
             "require": {
@@ -406,7 +406,7 @@
                 }
             ],
             "description": "A PHP scraper for Google Play Store and Apple App Store.",
-            "time": "2017-04-08T22:33:47+00:00"
+            "time": "2017-04-09T05:09:47+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
