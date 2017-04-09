@@ -96,6 +96,14 @@ input.search-input.form-control::placeholder {
     color: #ecf0f1;
 }
 
+.search-icon {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background-color: inherit;
+    border-radius: 0;
+    color: #fff;
+}
+
 /* rating box */
 .rating-box {
     background-color: #55a2e8;
