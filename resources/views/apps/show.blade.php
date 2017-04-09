@@ -4,12 +4,12 @@
 <div class="searchbar">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group mb-2 mt-2">
                     <input type="text" name="search" value="Search for apps..." class="form-control">
                 </div>
             </div>
-            <div class="col-md-3">
+            {{-- <div class="col-md-3">
                 <div class="form-group mb-2 mt-2">
                     <input type="text" name="store" value="Choose your store..." class="form-control">
                 </div>
@@ -18,7 +18,7 @@
                 <div class="form-group mb-2 mt-2">
                     <input type="text" name="country" value="Choose your country" class="form-control">
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
@@ -60,24 +60,28 @@
             <div class="col-md-6">
                 <h3 class="with-hr">Ranking</h3>
                 {{-- <hr> --}}
-                <div class="stats-box">
-                    <p>Today</p>
-                    <hr>
-                    <h1 class="text-center">#{{ $app->rankingEntries->first()->position }}</h1>
-                    <p class="text-center">
-                        {{ ucfirst($app->rankingEntries->first()->type) }} apps,
-                        @if ($app->os == 'ios')
-                            App Store
-                        @else
-                            Google Play
-                        @endif
-                    </p>
-                </div>
+                @if ($app->rankingEntries->count() > 0)
+                    <div class="stats-box">
+                        <p>Today</p>
+                        <hr>
+                        <h1 class="text-center">#{{ $app->rankingEntries->first()->position }}</h1>
+                        <p class="text-center">
+                            {{ ucfirst($app->rankingEntries->first()->type) }} apps,
+                            @if ($app->os == 'ios')
+                                App Store
+                            @else
+                                Google Play
+                            @endif
+                        </p>
+                    </div>
+                @else
+                    <p>This app hasn't been featured in the top 100 rank.</p>
+                @endif
             </div>
             <div class="col-md-6">
                 <h3 class="with-hr">Statistics</h3>
                 {{-- <hr> --}}
-                <p>Not enough data to generate graph...</p>
+                <p>There's not enough rank data to generate a chart yet.</p>
             </div>
         </div>
     </div>
