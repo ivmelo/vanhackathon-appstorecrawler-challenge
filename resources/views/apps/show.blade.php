@@ -27,13 +27,20 @@
         <div class="row">
             <div class="col-md-2">
                 <img src="{{ $app->icon_url }}" alt="App Icon" class="full-width app-icon">
+                <a href="{{ $app->store_url }}" target="_blank" class="btn buy-button mt-2">{{ $app->price }}</a>
             </div>
             <div class="col-md-7">
-                <h2>{{ $app->name }}</h2>
-                <h5>{{ $app->developer }}</h5>
-                <div class="list">
+                <h2>{{ $app->name }}
+                    @if ($app->os == 'ios')
+                        <img src="{{ asset('img/app-store.png') }}" alt="App Store Logo" class="store-logo">
+                    @else
+                        <img src="{{ asset('img/play-store.png') }}" alt="App Store Logo" class="store-logo">
+                    @endif
+                </h2>
 
-                </div>
+                <h5>{{ $app->developer }}</h5>
+                <span class="tag">{{ $app->category }}</span>
+                <span class="tag">{{ $app->price == 'Free' ? 'Free' : 'Paid' }}</span>
                 <p>{{ str_limit($app->description, 230) }}</p>
             </div>
             <div class="col-md-3">
@@ -47,15 +54,17 @@
         </div>
     </div>
 </div>
-<div class="stats">
+<div class="stats mt-5">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <h3>Ranking</h3>
                 <hr>
                 <div class="stats-box">
-                    <h1>#{{ $app->rankingEntries->first()->position }}</h1>
-                    <p>US Ranking, Apps</p>
+                    <p>By Country</p>
+                    <hr>
+                    <h1 class="text-center">#{{ $app->rankingEntries->first()->position }}</h1>
+                    <p class="text-center">General Ranking</p>
                 </div>
             </div>
             <div class="col-md-6">
@@ -66,22 +75,16 @@
         </div>
     </div>
 </div>
-<div class="screens">
+<div class="screens mt-5">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <h3>Screenshots</h3>
                 <hr>
                 <div class="screenshots">
-                    <img src="https://unsplash.it/720/1280" alt="App screenshot." class="app-screenshot">
-                    <img src="https://unsplash.it/720/1280" alt="App screenshot." class="app-screenshot">
-                    <img src="https://unsplash.it/720/1280" alt="App screenshot." class="app-screenshot">
-                    <img src="https://unsplash.it/720/1280" alt="App screenshot." class="app-screenshot">
-                    <img src="https://unsplash.it/720/1280" alt="App screenshot." class="app-screenshot">
-                    <img src="https://unsplash.it/720/1280" alt="App screenshot." class="app-screenshot">
-                    <img src="https://unsplash.it/720/1280" alt="App screenshot." class="app-screenshot">
-                    <img src="https://unsplash.it/720/1280" alt="App screenshot." class="app-screenshot">
-                    <img src="https://unsplash.it/720/1280" alt="App screenshot." class="app-screenshot">
+                    @foreach ($app->screenshots as $screenshot)
+                        <img src="{{ $screenshot->img_url }}" alt="App screenshot." class="app-screenshot">
+                    @endforeach
                 </div>
             </div>
         </div>

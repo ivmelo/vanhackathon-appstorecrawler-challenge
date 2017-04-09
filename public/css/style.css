@@ -28,6 +28,12 @@ hr {
     width: 100%;
 }
 
+.store-logo {
+    height: 1.8rem;
+    margin-left: .3em;
+    margin-bottom: .1em;
+}
+
 /* components */
 .searchbar {
     background-color: #1d374f;
@@ -46,9 +52,10 @@ hr {
     color: #ecf0f1;
 }
 
+/* rating box */
 .rating-box {
     background-color: #55a2e8;
-    border-radius: 10px;
+    border-radius: 5px;
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
@@ -61,6 +68,58 @@ hr {
 .rating-box p {
     margin-bottom: 0;
 }
+
+/* stats box */
+.stats-box {
+    max-width: 200px;
+    border: 1px solid #f89622;
+    border-radius: 5px;
+    padding: 1rem;
+}
+.stats-box h1,
+.stats-box p {
+    color: #f89622;
+    margin: 0;
+}
+
+.stats-box hr {
+    border-color: #f89622;
+}
+
+/* buttons */
+.buy-button {
+    border: 1px solid #1d374f;
+    color: #1d374f;
+    font-weight: 400;
+    text-transform: uppercase;
+    padding: .3rem 1.5rem;
+    border-radius: 20px;
+    min-width: 100px;
+    display: block;
+    margin: 0 auto;
+    font-size: 15px;
+}
+
+.buy-button:hover {
+    background-color: #1d374f;
+    color: #fff;
+}
+
+/* tags */
+span.tag {
+    border: 1px solid #f89622;
+    color: #f89622;
+    text-transform: uppercase;
+    padding: .1rem 2rem;
+    border-radius: 20px;
+    font-weight: 400;
+    margin-right: .5rem;
+    font-size: 15px;
+    display: inline-block;
+    margin-top: .2rem;
+    margin-bottom: .4rem;
+}
+
 
 /* specific styles */
 

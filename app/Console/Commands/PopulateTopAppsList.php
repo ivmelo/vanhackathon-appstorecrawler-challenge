@@ -111,6 +111,12 @@ class PopulateTopAppsList extends Command
                 'type' => $price == $this::FREE ? 'free' : 'paid',
             ]);
 
+            foreach ($appDetails['screens'] as $screenshot) {
+                $app->screenshots()->firstOrCreate([
+                    'img_url' => $screenshot
+                ]);
+            }
+
             $bar->advance();
         }
 
