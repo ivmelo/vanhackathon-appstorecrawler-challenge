@@ -5,9 +5,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="form-group mb-2 mt-2">
-                    <input type="text" name="search" value="Search for apps..." class="form-control">
-                </div>
+                <form action="{{ action('AppController@index') }}" method="get">
+                    <div class="form-group mb-2 mt-2">
+                        <input type="text" name="q" id="q" class="form-control search-input" placeholder="Search for an app, or paste a url from Google Play or the App Store...">
+                    </div>
+                </form>
             </div>
             {{-- <div class="col-md-3">
                 <div class="form-group mb-2 mt-2">
@@ -59,7 +61,6 @@
         <div class="row">
             <div class="col-md-6">
                 <h3 class="with-hr">Ranking</h3>
-                {{-- <hr> --}}
                 @if ($app->rankingEntries->count() > 0)
                     <div class="stats-box">
                         <p>Today</p>
@@ -80,7 +81,6 @@
             </div>
             <div class="col-md-6">
                 <h3 class="with-hr">Statistics</h3>
-                {{-- <hr> --}}
                 <p>There's not enough rank data to generate a chart yet.</p>
             </div>
         </div>
@@ -91,7 +91,6 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 class="with-hr">Screenshots</h3>
-                {{-- <hr> --}}
                 <div class="screenshots">
                     @foreach ($app->screenshots as $screenshot)
                         <img src="{{ $screenshot->img_url }}" alt="App screenshot." class="app-screenshot">
