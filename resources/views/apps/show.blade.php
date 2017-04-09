@@ -15,22 +15,20 @@
         <div class="row">
             <div class="col-md-3">
                 <img src="{{ $app->icon_url }}" alt="App Icon" class="full-width app-icon">
-                {{-- <a href="{{ $app->store_url }}" target="_blank" class="btn buy-button mt-2">{{ $app->price }}</a> --}}
             </div>
             <div class="col-md-6">
                 <h2>{{ $app->name }}
                     @if ($app->os == 'ios')
-                        <img src="{{ asset('img/app-store.png') }}" alt="App Store Logo" class="store-logo">
+                        <a href="{{ $app->store_url }}" target="_blank"><img src="{{ asset('img/app-store.png') }}" alt="App Store Logo" class="store-logo"></a>
                     @else
-                        <img src="{{ asset('img/play-store.png') }}" alt="App Store Logo" class="store-logo">
+                        <a href="{{ $app->store_url }}" target="_blank"><img src="{{ asset('img/play-store.png') }}" alt="App Store Logo" class="store-logo"></a>
                     @endif
                 </h2>
 
                 <p class="fw-400">{{ $app->developer }}</p>
-                {{-- <span class="tag">{{ $app->category }}</span>
-                <span class="tag">{{ $app->price == 'Free' ? 'Free' : 'Paid' }}</span> --}}
+
                 <p>{{ str_limit($app->description, 230) }}</p>
-                <p>Price: {{ $app->price }}
+                <p class="fw-400">Price: {{ $app->price }}
                     <span class="tag">{{ $app->category }}</span>
                     <span class="tag">{{ $app->price == 'Free' ? 'Free' : 'Paid' }}</span>
                 </p>
