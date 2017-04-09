@@ -32,8 +32,6 @@ class AppController extends Controller
             $q->where('os', '=', 'ios');
         })->whereDate('created_at', '=', Carbon::today()->toDateString())->limit(10)->orderBy('position', 'asc')->with('app')->get();
 
-
-        // dd($googlePlayFree);
         return view('apps.index', [
             'googlePlayFreeRankingEntry' => $googlePlayFreeRankingEntry,
             'appStoreFreeRankingEntry' => $appStoreFreeRankingEntry,

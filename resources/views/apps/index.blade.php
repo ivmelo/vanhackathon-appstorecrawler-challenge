@@ -13,7 +13,7 @@
 </div>
 <div class="charts">
     <div class="container">
-        <h1 class="text-center mb-5">Top 10 Free Apps</h1>
+        <h1 class="text-center margin-bottom-5">Top 10 Free Apps</h1>
 
         <div class="row">
             <div class="col-md-6">
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <h1 class="text-center mb-5">Top 10 Paid Apps</h1>
+        <h1 class="text-center margin-top-5 margin-bottom-5">Top 10 Paid Apps</h1>
 
         <div class="row">
             <div class="col-md-6">

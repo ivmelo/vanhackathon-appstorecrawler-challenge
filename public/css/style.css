@@ -60,6 +60,14 @@ hr {
     -webkit-box-orient: vertical;
 }
 
+.margin-top-5 {
+    margin-top: 5rem;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5rem;
+}
+
 /* components */
 .searchbar {
     background-color: #1d374f;
