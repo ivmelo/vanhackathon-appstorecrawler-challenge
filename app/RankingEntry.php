@@ -8,8 +8,8 @@ class RankingEntry extends Model
 {
     protected $fillable = ['position', 'type'];
 
-    public function apps()
+    public function app()
     {
-        return $this->belongsTo(App\App::class);
+        return $this->belongsTo(App::class);
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\App;
+use App\RankingEntry;
+use Carbon\Carbon;
 
 class AppController extends Controller
 {
@@ -14,28 +16,20 @@ class AppController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $googlePlayFreeRankingEntry = RankingEntry::where('type', '=', 'free')->whereHas('App', function($q){
+            $q->where('os', '=', 'android');
+        })->whereDate('created_at', '=', Carbon::today()->toDateString())->limit(10)->orderBy('position', 'asc')->with('app')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        $appStoreFreeRankingEntry = RankingEntry::where('type', '=', 'free')->whereHas('App', function($q){
+            $q->where('os', '=', 'ios');
+        })->whereDate('created_at', '=', Carbon::today()->toDateString())->limit(10)->orderBy('position', 'asc')->with('app')->get();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+
+        // dd($googlePlayFree);
+        return view('apps.index', [
+            'googlePlayFreeRankingEntry' => $googlePlayFreeRankingEntry,
+            'appStoreFreeRankingEntry' => $appStoreFreeRankingEntry,
+        ]);
     }
 
     /**
@@ -51,17 +45,6 @@ class AppController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -69,17 +52,6 @@ class AppController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
     {
         //
     }
