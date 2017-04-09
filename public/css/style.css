@@ -95,7 +95,8 @@ input.search-input.form-control::placeholder {
 }
 
 .rating-box h1,
-.rating-box p small {
+.rating-box p small,
+.rating-box span {
     color: #fff;
 }
 

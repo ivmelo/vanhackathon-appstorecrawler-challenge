@@ -5,11 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{ action('AppController@index') }}" method="get">
-                    <div class="form-group mb-2 mt-2">
-                        <input type="text" name="q" id="q" class="form-control search-input" placeholder="Search for an app, or paste a url from Google Play or the App Store...">
-                    </div>
-                </form>
+                @include('partials.searchwidget')
             </div>
             {{-- <div class="col-md-3">
                 <div class="form-group mb-2 mt-2">
@@ -49,7 +45,8 @@
                 <h3>Rating</h3>
                 <hr>
                 <div class="rating-box text-center">
-                    <h1>{{ round($app->rating, 1) }}</h1>
+                    <h1>{{ number_format($app->rating, 1) }}</h1>
+                    @include('partials.stars')
                     <p><small>{{ $app->rating_count }} ratings</small></p>
                 </div>
             </div>
@@ -81,7 +78,7 @@
             </div>
             <div class="col-md-6">
                 <h3 class="with-hr">Statistics</h3>
-                <p>There's not enough rank data to generate a chart yet.</p>
+                <p>There's not enough data to generate a chart yet.</p>
             </div>
         </div>
     </div>
