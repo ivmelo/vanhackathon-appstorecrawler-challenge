@@ -80,42 +80,12 @@ class PopulateTopAppsList extends Command
 
         foreach ($topApps as $topAppsEntry) {
 
-            // print_r($topAppsEntry);
-
-            if ($os == $this::ANDROID) {
-                $appDetails = $scraper->getPlayStoreAppData($topAppsEntry['url']);
-            } else {
-                $appDetails = $scraper->getAppStoreAppData($topAppsEntry['url']);
-            }
-
-            // print_r($appDetails);
-
-            $app = App::firstOrCreate([
-                'name' => $appDetails['name'],
-                'developer' => $appDetails['developer'],
-                'os' => $os == $this::IOS ? 'ios' : 'android',
-            ],
-            [
-                'icon_url' => $appDetails['icon_url'],
-                'description' => $appDetails['description'],
-                'price' => $appDetails['price'],
-                'category' => $appDetails['category'],
-                'last_updated' => $appDetails['last_update'],
-                'rating' => round($appDetails['rating'], 4),
-                'rating_count' => $appDetails['rating_count'],
-                'store_url' => $topAppsEntry['url'],
-            ]);
+            $app = App::findOrCreateFromUrl($topAppsEntry['url']);
 
             $app->rankingEntries()->create([
                 'position' => $topAppsEntry['position'],
                 'type' => $price == $this::FREE ? 'free' : 'paid',
             ]);
-
-            foreach ($appDetails['screens'] as $screenshot) {
-                $app->screenshots()->firstOrCreate([
-                    'img_url' => $screenshot
-                ]);
-            }
 
             $bar->advance();
         }
