@@ -7,7 +7,7 @@
 
         <div class="row">
             <div class="col-md-10 offset-md-1">
-                <h3 class="mb-3 text-center">{{ $searchResults->count() }} results for "{{ $query }}"</h3>
+                <h3 class="mb-4 text-center">{{ $searchResults->count() }} results for "{{ $query }}"</h3>
 
                 <div class="ranking-list">
                     @foreach ($searchResults as $searchResult)
@@ -19,9 +19,16 @@
                                 <div class="col-sm-2">
                                     <img src="{{ $searchResult->icon_url }}" class="full-width app-icon">
                                 </div>
-                                <div class="col-sm-8">
+                                <div class="col-sm-7">
                                     <h4 class="ellipsis-2">{{ $searchResult->name }}</h4>
                                     <p class="ellipsis-1">{{ $searchResult->developer }}</p>
+                                </div>
+                                <div class="col-sm-1">
+                                    @if ($searchResult->os == 'ios')
+                                        <img src="{{ asset('img/app-store.png') }}" alt="App Store Logo" class="store-logo block-center">
+                                    @else
+                                        <img src="{{ asset('img/play-store.png') }}" alt="App Store Logo" class="store-logo block-center">
+                                    @endif
                                 </div>
                                 <div class="col-sm-2">
                                     <span class="tag mini">{{ $searchResult->price }}</span>

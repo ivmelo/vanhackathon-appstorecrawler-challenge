@@ -34,6 +34,11 @@ hr {
     margin-bottom: .1em;
 }
 
+.block-center {
+    display: block;
+    margin: 0 auto;
+}
+
 .with-hr {
     border-bottom: 1px solid #c6ccd2;
     padding-bottom: .6em;
