@@ -7,7 +7,14 @@
             <h1 class="text-center">Get insights on your apps!</h1>
             <p class="lead text-center">Mobile add planning, execution and analysis are complicated for startups <br>
                 because they cannot reach all available app marketing tools.</p>
-            <p class="lead text-center">App samurai makes it easy for them without requiring in depth mobild ads knowledge.</p>
+            <p class="lead text-center">App samurai makes it easy for them without requiring in depth mobile ads knowledge.</p>
+
+            <form action="{{ action('AppController@index') }}" method="get">
+                <div class="form-group">
+                    <input type="text" name="q" id="q" class="form-control" placeholder="Search for an app, or paste a url from Google Play or the App Store.">
+                </div>
+            </form>
+
         </div>
     </div>
 </div>

@@ -17,7 +17,21 @@ class AppController extends Controller
     public function index(Request $request)
     {
         if ($request->has('q')) {
-            dd($request->get('q'));
+
+            // First, check if it's a valid itunes or play store url, and search for the app using the app ID.
+            if (strpos($request->get('q'), 'itunes.apple.com') || strpos($request->get('q'), 'play.google.com')) {
+                $app = App::findOrCreateFromUrl($request->get('q'));
+                return redirect()->action('AppController@show', $app->id);
+            }
+
+            // Find apps by name.
+            $apps = App::where('name', 'like', '%'. $request->get('q') . '%')->get();
+
+            return view('apps.search', [
+                'searchResults' => $apps,
+                'query' => $request->get('q'),
+            ]);
+
         } else {
             $googlePlayFreeRankingEntry = RankingEntry::where('type', '=', 'free')->whereHas('App', function($q){
                 $q->where('os', '=', 'android');
