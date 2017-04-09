@@ -93,8 +93,9 @@ input.search-input.form-control {
 }
 
 input.search-input.form-control::placeholder {
-    color: #ecf0f1;
+    color: #fff;
 }
+
 
 .search-icon {
     border: none;

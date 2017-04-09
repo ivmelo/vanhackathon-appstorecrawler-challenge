@@ -4,10 +4,12 @@
 <div class="jumbo">
     <div class="container">
         <div class="call-to-action">
-            <h1 class="text-center">Get insights into your apps!</h1>
-            <p class="lead text-center">Mobile add planning, execution and analysis are complicated for startups <br>
-                because they cannot reach all available app marketing tools.</p>
-            <p class="lead text-center">App Samurai makes it easy for them without requiring in depth mobile ads knowledge.</p>
+            <h1 class="text-center mb-5">Get insights for your apps!</h1>
+
+            <p class="lead text-center mb-5">
+                Mobile ads planning, execution and analysis are complicated <br>
+                for startups because they cannot reach all available app marketing tools. <br>
+                App Samurai makes it easy for you, without requiring in depth mobile ads knowledge.</p>
 
             <div class="col-md-10 offset-md-1">
                 @include('partials.searchwidget')
