@@ -56,9 +56,9 @@
                             <div class="stats-box">
                                 <p>General</p>
                                 <hr>
-                                <h1 class="text-center">#{{ $app->rankingEntries->first()->position }}</h1>
+                                <h1 class="text-center">#{{ $app->rankingEntries->last()->position }}</h1>
                                 <p class="text-center">
-                                    {{ ucfirst($app->rankingEntries->first()->type) }} Apps
+                                    {{ ucfirst($app->rankingEntries->last()->type) }} Apps
                                     <br>
                                     @if ($app->os == 'ios')
                                         App Store

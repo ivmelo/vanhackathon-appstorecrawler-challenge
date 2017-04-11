@@ -109,7 +109,7 @@ class AppController extends Controller
             } else {
                 $q->where('price', '=', 'Free');
             }
-        })->orderBy('position', 'asc')->get();
+        })->whereDate('created_at', '=', Carbon::today()->toDateString())->orderBy('position', 'asc')->get();
 
         $categoryPosition = 0;
 
