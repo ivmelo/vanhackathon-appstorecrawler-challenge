@@ -76,7 +76,7 @@ class App extends Model
                     'price' => $appDetails['price'],
                     'category' => $appDetails['category'],
                     'last_updated' => $appDetails['last_update'],
-                    'rating' => round($appDetails['rating'], 4),
+                    'rating' => $appDetails['rating'] ? round($appDetails['rating'], 4) : null,
                     'rating_count' => $appDetails['rating_count'],
                     'store_url' => $betterURL,
                     'store_id' => $storeId

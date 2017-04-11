@@ -37,9 +37,13 @@
                 <h3>Rating</h3>
                 <hr>
                 <div class="rating-box text-center">
-                    <h1>{{ number_format($app->rating, 1) }}</h1>
-                    @include('partials.stars')
-                    <p><small>{{ $app->rating_count }} ratings</small></p>
+                    @if ($app->rating)
+                        <h1>{{ number_format($app->rating, 1) }}</h1>
+                        @include('partials.stars')
+                        <p><small>{{ $app->rating_count }} ratings</small></p>
+                    @else
+                        <p><small>Not yet rated.</small></p>
+                    @endif
                 </div>
             </div>
         </div>

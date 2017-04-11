@@ -25,8 +25,8 @@ class CreateAppsTable extends Migration
             $table->string('version')->nullable();
             $table->string('languages')->nullable();
             $table->string('copyright')->nullable();
-            $table->double('rating');
-            $table->integer('rating_count');
+            $table->double('rating')->nullable();
+            $table->integer('rating_count')->nullable();
             $table->enum('os', ['android', 'ios']);
             $table->string('store_url');
             $table->timestamps();
