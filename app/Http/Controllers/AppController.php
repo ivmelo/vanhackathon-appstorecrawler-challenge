@@ -95,7 +95,7 @@ class AppController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         $app = App::findOrFail($id);
 
@@ -120,9 +120,12 @@ class AppController extends Controller
                 break;
         }
 
+        $showGraph = $request->get('g') == 'true';
+
         return view('apps.show', [
             'app' => $app,
-            'categoryPosition' => $categoryPosition
+            'categoryPosition' => $categoryPosition,
+            'showGraph' => $showGraph,
         ]);
     }
 }

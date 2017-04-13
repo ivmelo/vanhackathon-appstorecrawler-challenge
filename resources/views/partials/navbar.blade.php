@@ -14,12 +14,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ action('AppController@ranking') }}">App Ranking</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features and Benefits</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Case Studies</a>
-                </li>
             </ul>
         </div>
     </div>
