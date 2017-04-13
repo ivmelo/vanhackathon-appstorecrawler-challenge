@@ -92,7 +92,7 @@
             </div>
             <div class="col-md-6">
                 <h3 class="with-hr">Statistics</h3>
-                @if ($app->rankingEntries->count() > 1)
+                @if ($showGraph && $app->rankingEntries->count() > 1)
                 <canvas id="appChart" width="400" height="200"></canvas>
                 @else
                 <p>There's not enough data to generate a chart for this app.</p>
@@ -118,32 +118,38 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-<script type="text/javascript">
-var ctx = document.getElementById("appChart");
-var myChart = new Chart(ctx, {
-type: 'line',
-data: {
-    labels: [@foreach($app->rankingEntries as $entry) "{{ $entry->created_at->format('M d') }}", @endforeach],
-    datasets: [{
-        label: 'General Store Ranking',
-        data: [@foreach($app->rankingEntries as $entry) {{ $entry->position }}, @endforeach],
-        fill: false,
-        borderColor: '#f89622',
-        backgroundColor: '#f89622',
-    }]
-},
-options: {
-    scales: {
-        yAxes: [{
-            ticks: {
-                beginAtZero: false,
-                fixedStepSize: true,
-                reverse: true,
+    @if ($showGraph)
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <script type="text/javascript">
+        var ctx = document.getElementById("appChart");
+
+        var labels = [@foreach($app->rankingEntries as $entry) "{{ $entry->created_at->format('M d') }}", @endforeach];
+        var data = [@foreach($app->rankingEntries as $entry) {{ $entry->position }}, @endforeach];
+
+        var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'General Store Ranking',
+                data: data,
+                fill: false,
+                borderColor: '#f89622',
+                backgroundColor: '#f89622',
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: false,
+                        fixedStepSize: true,
+                        reverse: true,
+                    }
+                }]
             }
-        }]
-    }
-}
-});
-</script>
+        }
+        });
+        </script>
+    @endif
 @endsection
