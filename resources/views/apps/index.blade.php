@@ -7,9 +7,10 @@
             <h1 class="text-center mb-5">Get insights for your apps!</h1>
 
             <p class="lead text-center mb-5">
-                Mobile ads planning, execution and analysis are complicated <br>
-                for startups because they cannot reach all available app marketing tools. <br>
-                App Samurai makes it easy for you, without requiring in depth mobile ads knowledge.</p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do tempor ut labore et magna aliqua. <br>
+                Ut enim ad minim veniam, quis nostrud ullamco nisi ut aliquip ex ea commodo consequat. <br>
+                Duis aute irure dolor in reprehenderit in velit esse cillum dolore eu fugiat nulla.
+            </p>
 
             <div class="col-md-10 offset-md-1">
                 @include('partials.searchwidget')

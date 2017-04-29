@@ -120,7 +120,7 @@ class AppController extends Controller
                 break;
         }
 
-        $showGraph = $request->get('g') == 'true';
+        $showGraph = true; // $request->get('g') == 'true';
 
         return view('apps.show', [
             'app' => $app,

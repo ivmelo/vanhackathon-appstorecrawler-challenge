@@ -4,14 +4,14 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="{{ action('AppController@index') }}">
-            <img src="{{ asset('img/appsamurai-logo.png') }}" height="35" class="d-inline-block align-top" alt="">
+            <h3><span class="fa fa-app"></span>StoreCrawler</h3>
         </a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item @if(Request::is('apps')) active @endif">
                     <a class="nav-link" href="{{ action('AppController@index') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item @if(Request::is('ranking')) active @endif">
                     <a class="nav-link" href="{{ action('AppController@ranking') }}">App Ranking</a>
                 </li>
             </ul>
