@@ -37,9 +37,13 @@
                 <h3>Rating</h3>
                 <hr>
                 <div class="rating-box text-center">
-                    <h1>{{ number_format($app->rating, 1) }}</h1>
-                    @include('partials.stars')
-                    <p><small>{{ $app->rating_count }} ratings</small></p>
+                    @if ($app->rating)
+                        <h1>{{ number_format($app->rating, 1) }}</h1>
+                        @include('partials.stars')
+                        <p><small>{{ $app->rating_count }} ratings</small></p>
+                    @else
+                        <p><small>Not yet rated.</small></p>
+                    @endif
                 </div>
             </div>
         </div>
@@ -56,9 +60,9 @@
                             <div class="stats-box">
                                 <p>General</p>
                                 <hr>
-                                <h1 class="text-center">#{{ $app->rankingEntries->first()->position }}</h1>
+                                <h1 class="text-center">#{{ $app->rankingEntries->last()->position }}</h1>
                                 <p class="text-center">
-                                    {{ ucfirst($app->rankingEntries->first()->type) }} Apps
+                                    {{ ucfirst($app->rankingEntries->last()->type) }} Apps
                                     <br>
                                     @if ($app->os == 'ios')
                                         App Store
@@ -92,7 +96,11 @@
             </div>
             <div class="col-md-6">
                 <h3 class="with-hr">Statistics</h3>
+                @if ($showGraph && $app->rankingEntries->count() > 1)
+                <canvas id="appChart" width="400" height="200"></canvas>
+                @else
                 <p>There's not enough data to generate a chart for this app.</p>
+                @endif
             </div>
         </div>
     </div>
@@ -111,4 +119,41 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    @if ($showGraph)
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <script type="text/javascript">
+        var ctx = document.getElementById("appChart");
+
+        var labels = [@foreach($app->rankingEntries as $entry) "{{ $entry->created_at->format('M d') }}", @endforeach];
+        var data = [@foreach($app->rankingEntries as $entry) {{ $entry->position }}, @endforeach];
+
+        var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'General Store Ranking',
+                data: data,
+                fill: false,
+                borderColor: '#f89622',
+                backgroundColor: '#f89622',
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: false,
+                        fixedStepSize: true,
+                        reverse: true,
+                    }
+                }]
+            }
+        }
+        });
+        </script>
+    @endif
 @endsection
