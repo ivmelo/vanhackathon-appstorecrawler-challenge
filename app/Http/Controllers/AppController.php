@@ -21,6 +21,7 @@ class AppController extends Controller
             // First, check if it's a valid itunes or play store url, and search for the app using the app ID.
             if (strpos($request->get('q'), 'itunes.apple.com') || strpos($request->get('q'), 'play.google.com')) {
                 $app = App::findOrCreateFromUrl($request->get('q'));
+
                 return redirect()->action('AppController@show', $app->id);
             }
 
@@ -37,21 +38,20 @@ class AppController extends Controller
                 'searchResults' => $apps,
                 'query' => $request->get('q'),
             ]);
-
         } else {
-            $googlePlayFreeRankingEntry = RankingEntry::where('type', '=', 'free')->whereHas('App', function($q){
+            $googlePlayFreeRankingEntry = RankingEntry::where('type', '=', 'free')->whereHas('App', function ($q) {
                 $q->where('os', '=', 'android');
             })->whereDate('created_at', '=', Carbon::today()->toDateString())->limit(10)->orderBy('position', 'asc')->with('app')->get();
 
-            $appStoreFreeRankingEntry = RankingEntry::where('type', '=', 'free')->whereHas('App', function($q){
+            $appStoreFreeRankingEntry = RankingEntry::where('type', '=', 'free')->whereHas('App', function ($q) {
                 $q->where('os', '=', 'ios');
             })->whereDate('created_at', '=', Carbon::today()->toDateString())->limit(10)->orderBy('position', 'asc')->with('app')->get();
 
-            $googlePlayPaidRankingEntry = RankingEntry::where('type', '=', 'paid')->whereHas('App', function($q){
+            $googlePlayPaidRankingEntry = RankingEntry::where('type', '=', 'paid')->whereHas('App', function ($q) {
                 $q->where('os', '=', 'android');
             })->whereDate('created_at', '=', Carbon::today()->toDateString())->limit(10)->orderBy('position', 'asc')->with('app')->get();
 
-            $appStorePaidRankingEntry = RankingEntry::where('type', '=', 'paid')->whereHas('App', function($q){
+            $appStorePaidRankingEntry = RankingEntry::where('type', '=', 'paid')->whereHas('App', function ($q) {
                 $q->where('os', '=', 'ios');
             })->whereDate('created_at', '=', Carbon::today()->toDateString())->limit(10)->orderBy('position', 'asc')->with('app')->get();
 
@@ -64,20 +64,21 @@ class AppController extends Controller
         }
     }
 
-    public function ranking(Request $request) {
-        $googlePlayFreeRankingEntry = RankingEntry::where('type', '=', 'free')->whereHas('App', function($q){
+    public function ranking(Request $request)
+    {
+        $googlePlayFreeRankingEntry = RankingEntry::where('type', '=', 'free')->whereHas('App', function ($q) {
             $q->where('os', '=', 'android');
         })->whereDate('created_at', '=', Carbon::today()->toDateString())->limit(100)->orderBy('position', 'asc')->with('app')->get();
 
-        $appStoreFreeRankingEntry = RankingEntry::where('type', '=', 'free')->whereHas('App', function($q){
+        $appStoreFreeRankingEntry = RankingEntry::where('type', '=', 'free')->whereHas('App', function ($q) {
             $q->where('os', '=', 'ios');
         })->whereDate('created_at', '=', Carbon::today()->toDateString())->limit(100)->orderBy('position', 'asc')->with('app')->get();
 
-        $googlePlayPaidRankingEntry = RankingEntry::where('type', '=', 'paid')->whereHas('App', function($q){
+        $googlePlayPaidRankingEntry = RankingEntry::where('type', '=', 'paid')->whereHas('App', function ($q) {
             $q->where('os', '=', 'android');
         })->whereDate('created_at', '=', Carbon::today()->toDateString())->limit(100)->orderBy('position', 'asc')->with('app')->get();
 
-        $appStorePaidRankingEntry = RankingEntry::where('type', '=', 'paid')->whereHas('App', function($q){
+        $appStorePaidRankingEntry = RankingEntry::where('type', '=', 'paid')->whereHas('App', function ($q) {
             $q->where('os', '=', 'ios');
         })->whereDate('created_at', '=', Carbon::today()->toDateString())->limit(100)->orderBy('position', 'asc')->with('app')->get();
 
@@ -92,7 +93,8 @@ class AppController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id, Request $request)
@@ -101,7 +103,7 @@ class AppController extends Controller
 
         // Try to guess the app category's position by counting how many apps
         // of the same category are in the main ranking, and finding it's position.
-        $rankingEntries = RankingEntry::with('app')->whereHas('App', function($q) use ($app){
+        $rankingEntries = RankingEntry::with('app')->whereHas('App', function ($q) use ($app) {
             $q->where('os', '=', $app->os);
             $q->where('category', '=', $app->category);
             if ($app->price != 'Free') {
@@ -116,8 +118,9 @@ class AppController extends Controller
         foreach ($rankingEntries as $rankingEntry) {
             $categoryPosition++;
 
-            if($rankingEntry->app->id == $app->id)
+            if ($rankingEntry->app->id == $app->id) {
                 break;
+            }
         }
 
         $showGraph = true; // $request->get('g') == 'true';
