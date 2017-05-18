@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\App;
 use Illuminate\Console\Command;
 use Ivmelo\StoreScraper\Scraper;
-use App\App;
 
 class PopulateTopAppsList extends Command
 {
@@ -44,7 +44,6 @@ class PopulateTopAppsList extends Command
      */
     public function handle()
     {
-
         $os = $this::IOS;
         $price = $this::FREE;
 
@@ -53,7 +52,6 @@ class PopulateTopAppsList extends Command
         $topApps = [];
 
         if ($this->option('all')) {
-
             $this->info('Grabing ranking data from App Store (Free)...');
             $appStoreTopFree = $scraper->getAppStoreTopFree();
             $this->info('Grabing ranking data from Google Play Store (Free)...');
@@ -78,7 +76,6 @@ class PopulateTopAppsList extends Command
             foreach ($playStoreTopPaid as $app) {
                 array_push($topApps, $app);
             }
-
         } else {
             if ($this->option('android')) {
                 $os = $this::ANDROID;
@@ -110,12 +107,11 @@ class PopulateTopAppsList extends Command
         $bar = $this->output->createProgressBar(count($topApps));
 
         foreach ($topApps as $topAppsEntry) {
-
             $app = App::findOrCreateFromUrl($topAppsEntry['url']);
 
             $app->rankingEntries()->create([
                 'position' => $topAppsEntry['position'],
-                'type' => $app->price == 'Free' ? 'free' : 'paid',
+                'type'     => $app->price == 'Free' ? 'free' : 'paid',
             ]);
 
             $bar->advance();
