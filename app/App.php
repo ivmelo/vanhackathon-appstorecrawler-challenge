@@ -25,7 +25,8 @@ class App extends Model
         return $this->hasMany(RankingEntry::class);
     }
 
-    public static function findOrCreateFromUrl($url) {
+    public static function findOrCreateFromUrl($url)
+    {
         $store = null;
         $storeId = null;
         $betterURL = null;
@@ -40,7 +41,7 @@ class App extends Model
             $storeId = substr($urlParts[4], 2);
             // Creates an APP URL for the US store.
             $betterURL = 'https://' . $parsedURL['host'] . '/us/app/' . $urlParts[3] . '/' . $urlParts[4] . '?mt=8';
-        } else if (strpos($url, 'play.google.com')) {
+        } elseif (strpos($url, 'play.google.com')) {
             $store = 'gplay';
             $queryParts = [];
             parse_str($parsedURL['query'], $queryParts);
@@ -60,7 +61,7 @@ class App extends Model
                 // Defines which store to query.
                 if ($store == 'itunes') {
                     $appDetails = $scraper->getAppStoreAppData($betterURL);
-                } else if ($store == 'gplay') {
+                } elseif ($store == 'gplay') {
                     $appDetails = $scraper->getPlayStoreAppData($betterURL);
                 }
 
@@ -91,6 +92,5 @@ class App extends Model
 
             return $app;
         }
-
     }
 }
